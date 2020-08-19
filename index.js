@@ -67,9 +67,10 @@ const SeverityAnnotationLevelMap = new Map([
             }
             return linter.getResult();
         }
-    })();
+    })();  
+    
     const annotations = result.failures.slice(0, 50).map((failure) => ({
-        path: failure.getFileName(),
+        path: failure.getFileName().replace("/github/workspace/", ""),
         start_line: failure.getStartPosition().getLineAndCharacter().line,
         end_line: failure.getEndPosition().getLineAndCharacter().line,
         annotation_level: SeverityAnnotationLevelMap.get(failure.getRuleSeverity()) || "notice",
